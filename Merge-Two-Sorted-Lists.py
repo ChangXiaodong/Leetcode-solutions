@@ -10,6 +10,9 @@ class ListNode(object):
 
 
 class Solution(object):
+    '''
+    注意引用，浅拷贝，深拷贝区别
+    '''
     def mergeTwoLists(self, l1, l2):
         """
         :type l1: ListNode
