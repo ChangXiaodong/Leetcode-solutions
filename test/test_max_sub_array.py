@@ -1,5 +1,5 @@
 import unittest
-import max_sub_array
+import Introduction_to_algorithm.section_4.max_sub_array as max_sub_array
 
 
 class test_max_sub_array(unittest.TestCase):
