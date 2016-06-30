@@ -10,7 +10,6 @@ def heap_sort(ary):
 def build_max_heap(ary):
     n = len(ary)
     for i in range(int(n / 2), -1, -1):
-    # for i in range(0, n):
         max_heap(ary, i, n)
     return ary
 
