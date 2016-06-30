@@ -49,7 +49,6 @@ def convert1(s, numRows):
 
         for x in s:
             L[index] += x
-            print L
             if index == 0:
                 step = 1
             elif index == numRows -1:
@@ -57,7 +56,7 @@ def convert1(s, numRows):
             index += step
 
         return ''.join(L)
-print convert("PAYPALISHIRING",3)
-print convert1("PAYPALISHIRING",3)
+print(convert("PAYPALISHIRING",3))
+print(convert1("PAYPALISHIRING",3))
 
 
