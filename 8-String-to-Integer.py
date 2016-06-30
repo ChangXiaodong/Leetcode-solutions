@@ -40,4 +40,4 @@ def myAyoi(str):
     return integer
 
 
-print myAyoi(" - 321")
+print(myAyoi(" - 321"))

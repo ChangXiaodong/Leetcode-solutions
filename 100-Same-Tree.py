@@ -4,7 +4,6 @@ Given two binary trees, write a function to check if they are equal or not.
 
 Two binary trees are considered equal if they are structurally identical and the nodes have the same value.
 '''
-import time
 # Definition for a binary tree node.
 class TreeNode(object):
     def __init__(self, x):
@@ -46,8 +45,7 @@ if __name__ == "__main__":
     treenode4.left = treenode8
     treenode8.left = treenode9
     treenode9.right = treenode10
-    start = time.clock()
     test = Solution()
-    print test.isSameTree(treenode8,treenode9)
+    print(test.isSameTree(treenode8,treenode9))
 
-    print time.clock() - start
+

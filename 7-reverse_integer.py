@@ -15,7 +15,7 @@ def reverse(x):
     while num != 0:
         y = y * 10 + num % 10
         num /= 10
-    if y > pow(2, 32)/2 - 1:  #the boundary of the integer is -2147483648 to 2147483647
+    if y > int(pow(2, 32)/2) - 1:  #the boundary of the integer is -2147483648 to 2147483647
         y = 0
     if x >= 0:
         return y
