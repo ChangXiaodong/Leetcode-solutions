@@ -36,7 +36,7 @@ def get_LCS_length(X, Y, c, i, j):
     if i == 0 or j == 0:
         return 0
     if X[i - 1] == Y[j - 1]:
-        c[i][j] = get_LCS_length(X, Y, c, i - 1, j - 1)
+        c[i][j] = get_LCS_length(X, Y, c, i - 1, j - 1) + 1
     else:
         c[i][j] = max(get_LCS_length(X, Y, c, i - 1, j), get_LCS_length(X, Y, c, i, j - 1))
     return c[i][j]
@@ -45,8 +45,9 @@ def get_LCS_length(X, Y, c, i, j):
 def memorized_LCS_length(X, Y):
     m = len(X)
     n = len(Y)
-    c = [[0 for i in range(n + 1)] for i in range(m + 1)]
-    print(get_LCS_length(X, Y, c, m, n))
+    ary = [[0 for i in range(n + 1)] for i in range(m + 1)]
+    get_LCS_length(X, Y, ary, m, n)
+    return ary
 
 
 c, b = LCS_length(['A', 'B', 'C', 'B', 'D', 'A', 'B'], ['B', 'D', 'C', 'A', 'B', 'A'])
@@ -55,4 +56,5 @@ for line in c:
 for line in b:
     print(line)
 
-# memorized_LCS_length(['A', 'B', 'C', 'B', 'D', 'A', 'B'], ['B', 'D', 'C', 'A', 'B', 'A'])
+for line in memorized_LCS_length(['A', 'B', 'C', 'B', 'D', 'A', 'B'], ['B', 'D', 'C', 'A', 'B', 'A']):
+    print(line)
