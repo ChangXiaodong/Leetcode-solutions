@@ -20,6 +20,6 @@ def optimal_bst(p, q, n):
 
 e, root = optimal_bst([0, 0.15, 0.1, 0.05, 0.1, 0.2], [0.05, 0.1, 0.05, 0.05, 0.05, 0.1], 5)
 for l in e:
-    print l
+    print(l)
 for l in root:
-    print l
+    print(l)
