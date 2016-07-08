@@ -22,7 +22,7 @@ def print_LCS(b, X, i, j):
     if i == 0 or j == 0:
         return
     if b[i][j] == '\\':
-        print X[i - 1]
+        print(X[i - 1])
         print_LCS(b, X, i - 1, j - 1)
     elif b[i][j] == '|':
         print_LCS(b, X, i - 1, j)
@@ -46,14 +46,13 @@ def memorized_LCS_length(X, Y):
     m = len(X)
     n = len(Y)
     c = [[0 for i in range(n + 1)] for i in range(m + 1)]
-    get_LCS_length(X, Y, c, m, n)
-    print c
+    print(get_LCS_length(X, Y, c, m, n))
 
 
 c, b = LCS_length(['A', 'B', 'C', 'B', 'D', 'A', 'B'], ['B', 'D', 'C', 'A', 'B', 'A'])
 for line in c:
-    print line
+    print(line)
 for line in b:
-    print line
+    print(line)
 
-print memorized_LCS_length(['A', 'B', 'C', 'B', 'D', 'A', 'B'], ['B', 'D', 'C', 'A', 'B', 'A'])
+# memorized_LCS_length(['A', 'B', 'C', 'B', 'D', 'A', 'B'], ['B', 'D', 'C', 'A', 'B', 'A'])
