@@ -50,16 +50,35 @@ class Solution(object):
             bufnode = []
             nodeval.append(levelval)
             levelval = []
-        nodeval.reverse()
         return nodeval
 
 
+def dfs(node, res, level):
+    if node:
+        if len(res) < level + 1:
+            res.append([])
+        res[level].append(node.val)
+        dfs(node.left, res, level + 1)
+        dfs(node.right, res, level + 1)
+
+
+def levelOrderTraversal(root):
+    res = []
+    dfs(root, res, 0)
+    return res
+
 if __name__ == "__main__":
-    treenode1 = TreeNode(1)
-    treenode2 = TreeNode(2)
+    treenode1 = TreeNode(3)
+    treenode2 = TreeNode(9)
+    treenode3 = TreeNode(20)
+    treenode4 = TreeNode(15)
+    treenode5 = TreeNode(7)
     treenode1.left = treenode2
+    treenode1.right = treenode3
+    treenode3.left = treenode4
+    treenode3.right = treenode5
 
     start = time.clock()
     test = Solution()
-    print test.levelOrderBottom(treenode1)
-    print time.clock() - start
+    print(test.levelOrderBottom(treenode1))
+    print(levelOrderTraversal(treenode1))
