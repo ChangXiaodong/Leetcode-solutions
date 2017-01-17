@@ -37,6 +37,25 @@ def zigzagLevelOrder(root):
     return traversal
 
 
+# dfs recursive
+def dfs(node, res, level):
+    if node:
+        if len(res) < level + 1:
+            res.append([])
+        if level % 2 == 0:
+            res[level].append(node.val)
+        else:
+            res[level].insert(0, node.val)
+        dfs(node.left, res, level + 1)
+        dfs(node.right, res, level + 1)
+
+def zigzagLevelOrder1(root):
+    res = []
+    dfs(root, res, 0)
+    # dfs1(root, 0, res)
+    return res
+
+
 treenode1 = TreeNode(1)
 treenode2 = TreeNode(2)
 treenode3 = TreeNode(3)
@@ -48,3 +67,4 @@ treenode2.left = treenode4
 treenode3.right = treenode5
 
 print(zigzagLevelOrder(treenode1))
+print(zigzagLevelOrder1(treenode1))
