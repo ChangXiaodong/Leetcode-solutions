@@ -53,6 +53,7 @@ class Solution(object):
         return nodeval
 
 
+
 def dfs(node, res, level):
     if node:
         if len(res) < level + 1:
@@ -66,6 +67,8 @@ def levelOrderTraversal(root):
     res = []
     dfs(root, res, 0)
     return res
+
+
 
 if __name__ == "__main__":
     treenode1 = TreeNode(3)
