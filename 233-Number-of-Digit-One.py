@@ -10,6 +10,8 @@ Hint:
 
 Beware of overflow.
 '''
+
+
 class Solution(object):
     def countDigitOne(self, n):
         """
@@ -21,7 +23,7 @@ class Solution(object):
         q, x, ans = n, 1, 0
         while q > 0:
             digit = q % 10
-            q /= 10
+            q = q // 10
             ans += q * x
             if digit == 1:
                 ans += n % x + 1
@@ -30,26 +32,26 @@ class Solution(object):
             x *= 10
         return ans
 
-    def countDigitOne1(self,k):
+    def countDigitOne1(self, k):
         count = 0
         factor = 1
         n = k
-        while(n>0):
-            m = n/10
-            r = n%10
-            if(r == 0) :
+        while (n > 0):
+            m = n / 10
+            r = n % 10
+            if (r == 0):
                 amount = 0
-            elif(r > 1):
+            elif (r > 1):
                 amount = factor
             else:
-                amount = k%factor+1
+                amount = k % factor + 1
 
-            count += m*factor + amount
+            count += m * factor + amount
             factor *= 10
-            n = n/10
-        print count
+            n = n / 10
+        print(count)
 
 
 if __name__ == '__main__':
     Test = Solution()
-    print Test.countDigitOne(25)
+    print(Test.countDigitOne(11))
