@@ -54,4 +54,4 @@ class Solution(object):
 
 if __name__ == '__main__':
     Test = Solution()
-    print(Test.countDigitOne(11))
+    print(Test.countDigitOne(21345))
