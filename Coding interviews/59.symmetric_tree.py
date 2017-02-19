@@ -1,20 +1,20 @@
-def isSymmetic(left, right):
+def isSymmetic_recursive(left, right):
     if not left and not right:
         return True
     if not left or not right:
         return False
     return left.val == right.val and \
-           isSymmetic(left.left, right.right) and \
-           isSymmetic(left.right, right.left)
+           isSymmetic_recursive(left.left, right.right) and \
+           isSymmetic_recursive(left.right, right.left)
 
 
 def symmetric_tree(node):
     if not node:
         return
-    return isSymmetic(node.left, node.right)
+    return isSymmetic_recursive(node.left, node.right)
 
 
-def symmetric_tree_recursive(node):
+def symmetric_tree(node):
     if not node:
         return
     stack = [node.left, node.right]
