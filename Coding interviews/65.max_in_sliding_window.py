@@ -27,3 +27,4 @@ def max_in_window(arr, size):
 
 
 max_in_window([2, 3, 4, 2, 6, 2, 5, 1], 3)
+
