@@ -1,5 +1,5 @@
-#http://articles.leetcode.com/longest-palindromic-substring-part-ii/
-#https://leetcode.com/articles/longest-palindromic-substring/
+# http://articles.leetcode.com/longest-palindromic-substring-part-ii/
+# https://leetcode.com/articles/longest-palindromic-substring/
 def preProcess(s):
     new_s = '#'
     for m in s:
@@ -19,7 +19,7 @@ def longestPalindrome(s):
             P[i] = min(R - i, P[i_mirror])
         else:
             P[i] = 0
-        while T[i + 1 + P[i]] == T[i - 1 - P[i]]:
+        while i + 1 + P[i] < n and T[i + 1 + P[i]] == T[i - 1 - P[i]]:
             P[i] += 1
         if i + P[i] > R:
             C = i
@@ -31,8 +31,7 @@ def longestPalindrome(s):
         if P[i] > max_len:
             max_len = P[i]
             index = i
-    return s[(index - 1 - max_len) / 2:max_len]
+    return T[index - max_len:index + max_len].replace("#", "")
 
 
-
-print(longestPalindrome("babcbabcbaccba"))
+print(longestPalindrome("aaaa"))
