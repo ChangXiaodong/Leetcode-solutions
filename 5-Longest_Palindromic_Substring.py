@@ -34,4 +34,40 @@ def longestPalindrome(s):
     return T[index - max_len:index + max_len].replace("#", "")
 
 
+def isPalindrome(s):
+    pass
+
+
+def dfs(i, j, s, P):
+    P[i][j] = P[i + 1][j - 1] and s[i] == s[j]
+
+
+def longestPalindrome_dynamic(s):
+    if not s:
+        return ''
+    if s.__len__() == 1:
+        return s
+    length = len(s)
+    P = [[False for _ in range(length)] for _ in range(length)]
+    for i in range(length):
+        P[i][i] = True
+    max_len = 1
+    index = 0
+    for i in range(length - 1):
+        if s[i] == s[i + 1]:
+            P[i][i + 1] = True
+            max_len = 2
+            index = i
+    for n in range(2, length + 1):
+        for i in range(length - n + 1):
+            j = i + n - 1
+            if s[i] == s[j] and P[i + 1][j - 1]:
+                P[i][j] = True
+                max_len = n
+                index = i
+
+    return s[index:index+max_len]
+
+
 print(longestPalindrome("aaaa"))
+print(longestPalindrome_dynamic("abcda"))
