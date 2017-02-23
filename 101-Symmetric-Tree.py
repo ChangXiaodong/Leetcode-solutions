@@ -35,19 +35,11 @@ class Solution(object):
         return self.isSym(root.left,root.right)
 
     def isSym(self,node1,node2):
-        try:
-            print node1.val
-            print node2.val
-        except AttributeError,err:
-            print err
         if node1 == node2 and node1 == None:
-            print "True"
             return True
         elif not node1 or not node2:
-            print "False1"
             return False
         elif node1.val != node2.val:
-            print "Falise2"
             return False
 
         return self.isSym(node1.left,node2.right) and self.isSym(node1.right,node2.left)
@@ -61,5 +53,4 @@ if __name__ == "__main__":
     treenode1.right = treenode3
     start = time.clock()
     test = Solution()
-    print test.isSymmetric(treenode1)
-    print time.clock() - start
+    test.isSymmetric(treenode1)
