@@ -16,18 +16,20 @@ def longestPalindromeSubseq(s):
     """
     if not s:
         return 0
+    if s == s[::-1]:
+        return len(s)
     n = len(s)
-    dp = [1 for _ in range(n)]
-    for i in range(n - 1):
-        for j in range(i+1, n):
+    dp = [[0 for __ in range(n)] for _ in range(n)]
+    for i in range(n):
+        dp[i][i] = 1
+    for i in reversed(range(n - 1)):
+        for j in range(i + 1, n):
             if s[i] == s[j]:
-                if j > i + 1:
-                    dp[j] += 2
-                else:
-                    dp[j] = 2
+                dp[i][j] = dp[i + 1][j - 1] + 2
             else:
-                dp[j] = max(dp[j], dp[j - 1])
-    return dp
+                dp[i][j] = max(dp[i + 1][j], dp[i][j - 1])
+    return dp[0][n - 1]
+
 
 def longestPalindromeSubseq1(s):
     """
@@ -36,15 +38,16 @@ def longestPalindromeSubseq1(s):
     """
     n = len(s)
     dp = [1] * n
-    for j in range(1, len(s)):
-        pre = dp[j]
-        for i in reversed(range(0, j)):
-            tmp = dp[i]
-            if s[i] == s[j]:
-                dp[i] = 2 + pre if i + 1 <= j - 1 else 2
+    for i in range(1, n):
+        pre = dp[i]
+        for j in reversed(range(i)):
+            tmp = dp[j]
+            if s[j] == s[i]:
+                dp[j] = 2 + pre if j + 1 <= i - 1 else 2
             else:
-                dp[i] = max(dp[i + 1], dp[i])
+                dp[j] = max(dp[j + 1], dp[j])
             pre = tmp
     return dp[0]
 
-print(longestPalindromeSubseq1('ddddd'))
+
+print(longestPalindromeSubseq1('bbbab'))
