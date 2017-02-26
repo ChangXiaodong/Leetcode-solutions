@@ -33,15 +33,6 @@ def longestPalindrome(s):
             index = i
     return T[index - max_len:index + max_len].replace("#", "")
 
-
-def isPalindrome(s):
-    pass
-
-
-def dfs(i, j, s, P):
-    P[i][j] = P[i + 1][j - 1] and s[i] == s[j]
-
-
 def longestPalindrome_dynamic(s):
     if not s:
         return ''
