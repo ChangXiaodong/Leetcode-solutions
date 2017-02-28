@@ -17,22 +17,15 @@ def findTargetSumWays(nums, S):
     """
     if not nums:
         return
-    left = S
-    nums.sort()
-    nums.reverse()
-    i = 0
-    count = 0
-    while i < nums.__len__():
-        if left < nums[i]:
-            i += 1
-        else:
-            left -= nums[i]
-            nums.pop(i)
-        if left == 0:
-            count += 1
-            left = S
-    return count
+    sums = sum(nums)
+    if S > sums:
+        return 0
+    p2 = S + sums
+    if p2 % 2 != 0:
+        return 0
+    p_target = p2 / 2
+    return subSetSum(nums, p_target)
 
 
-print(findTargetSumWays([1, 1, 1, 1, 1], 3))
-print(subSetSum([1, 1, 1, 1, 1], 4))
+# print(findTargetSumWays([1, 1, 1, 1, 1], 3))
+print(subSetSum([2, 2, 2], 4))
