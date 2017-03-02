@@ -9,19 +9,16 @@ def calculateMinimumHP(dungeon):
     col = dungeon[0].__len__()
 
     dp = [[0 for _ in range(col)] for _ in range(row)]
-    dp[0][0] = dungeon[0][0]
-    for r in range(1, row):
-        dp[r][0] = dp[r - 1][0] + dungeon[r][0]
-    for c in range(1, col):
-        dp[0][c] = dp[0][c - 1] + dungeon[0][c]
-    health = 0
+    dp[row - 1][col - 1] = max(1, 1 - dungeon[row - 1][col - 1])
+    for r in range(row - 2, -1, -1):
+        dp[r][col - 1] = max(1, dp[r + 1][col - 1] - dungeon[r][col - 1])
+    for c in range(col - 2, -1, -1):
+        dp[row - 1][c] = max(1, dp[row - 1][c + 1] - dungeon[row - 1][c])
 
-    for r in range(1, row):
-        for c in range(1, col):
-            dp[r][c] = max(dp[r - 1][c], dp[r][c - 1]) + dungeon[r][c]
-            health = min(health, dp[r][c])
-    print(dp)
-    return abs(health) + 1
+    for r in range(row - 2, -1, -1):
+        for c in range(col - 2, -1, -1):
+            dp[r][c] = min(max(1, dp[r + 1][c] - dungeon[r][c]), max(1, dp[r][c + 1] - dungeon[r][c]))
+    return dp[0][0]
 
 
 print(calculateMinimumHP([
