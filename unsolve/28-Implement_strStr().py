@@ -23,3 +23,53 @@ def strStr(haystack, needle):
             else:
                 break
     return -1
+
+
+def strStr1(haystack, needle):
+    for i in range(len(haystack) - len(needle) + 1):
+        if haystack[i:i + len(needle)] == needle:
+            return i
+    return -1
+
+
+def strStr2(haystack, needle):
+    if not haystack and not needle:
+        return 0
+    if not needle:
+        return 0
+    n1 = len(haystack)
+    n2 = len(needle)
+    table = [0 for _ in range(n2)]
+
+    i = 1
+    j = 0
+    # build table
+    while i < n2:
+        if needle[i] != needle[j]:
+            if j > 0:
+                j = table[j - 1]
+            else:
+                i += 1
+        else:
+            table[i] = j + 1
+            j += 1
+            i += 1
+    index1 = 0
+    index2 = 0
+    # search
+    while index1 < n1:
+        if haystack[index1] == needle[index2]:
+            if index2 == n2 - 1:
+                return index1 + 1 - n2
+            else:
+                index1 += 1
+                index2 += 1
+        else:
+            if index2 == 0:
+                index1 += 1
+            else:
+                index2 = table[index2 - 1] #index2 = index2 - (index2 - table[index2 - 1])
+    return -1
+
+
+print(strStr2("aabaaabaaac", "aabaaac"))

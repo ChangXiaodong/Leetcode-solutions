@@ -6,6 +6,47 @@
 
 Leetcode
 28.Implement strStr()
+```python
+def strStr2(haystack, needle):
+    if not haystack and not needle:
+        return 0
+    if not needle:
+        return 0
+    n1 = len(haystack)
+    n2 = len(needle)
+    table = [0 for _ in range(n2)]
+
+    i = 1
+    j = 0
+    # build table
+    while i < n2:
+        if needle[i] != needle[j]:
+            if j > 0:
+                j = table[j - 1]
+            else:
+                i += 1
+        else:
+            table[i] = j + 1
+            j += 1
+            i += 1
+    index1 = 0
+    index2 = 0
+    # search
+    while index1 < n1:
+        if haystack[index1] == needle[index2]:
+            if index2 == n2 - 1:
+                return index1 + 1 - n2
+            else:
+                index1 += 1
+                index2 += 1
+        else:
+            if index2 == 0:
+                index1 += 1
+            else:
+                index2 = table[index2 - 1] 
+                #index2 = index2 - (index2 - table[index2 - 1])
+    return -1
+```
 
 ## 普通算法
 遍历字符串str1，检查每一个字符是否与str2匹配。如果不匹配，查找str1里面下一个字符，str2的pointer重置到开头。
@@ -15,23 +56,20 @@ Leetcode
 ##KMP
 先介绍“部分匹配表”
 ### 部分匹配表
+
 首先，要了解两个概念："前缀"和"后缀"。 "前缀"指除了最后一个字符以外，一个字符串的全部头部组合；"后缀"指除了第一个字符以外，一个字符串的全部尾部组合。
 　![bufenpipeibiao](./images/kmp15.png)
+  "部分匹配值"就是"前缀"和"后缀"的最长的共有元素的长度。以"ABCDABD"为例，
+-  "A"的前缀和后缀都为空集，共有元素的长度为0；
+-  "AB"的前缀为[A]，后缀为[B]，共有元素的长度为0；
+-  "ABC"的前缀为[A, AB]，后缀为[BC, C]，共有元素的长度0；
+-  "ABCD"的前缀为[A, AB, ABC]，后缀为[BCD, CD, D]，共有元素的长度为0；
+-  "ABCDA"的前缀为[A, AB, ABC, ABCD]，后缀为[BCDA, CDA, DA, A]，共有元素为"A"，长度为1；
+-  "ABCDAB"的前缀为[A, AB, ABC, ABCD, ABCDA]，后缀为[BCDAB, CDAB, DAB, AB, B]，共有元素为"AB"，长度为2；
+-  "ABCDABD"的前缀为[A, AB, ABC, ABCD, ABCDA, ABCDAB]，后缀为[BCDABD, CDABD, DABD, ABD, BD, D]，共有元素的长度为0。
+    　　![kmp16](./images/kmp16.png)
+    　　　"部分匹配"的实质是，有时候，字符串头部和尾部会有重复。比如，"ABCDAB"之中有两个"AB"，那么它的"部分匹配值"就是2（"AB"的长度）。搜索词移动的时候，第一个"AB"向后移动4位（字符串长度-部分匹配值），就可以来到第二个"AB"的位置。
 
-　　"部分匹配值"就是"前缀"和"后缀"的最长的共有元素的长度。以"ABCDABD"为例，
-　　－　"A"的前缀和后缀都为空集，共有元素的长度为0；
-　　－　"AB"的前缀为[A]，后缀为[B]，共有元素的长度为0；
-　　"部分匹配值"就是"前缀"和"后缀"的最长的共有元素的长度。以"ABCDABD"为例，
-　　－　"A"的前缀和后缀都为空集，共有元素的长度为0；
-　　－　"AB"的前缀为[A]，后缀为[B]，共有元素的长度为0；
-　　－　"ABC"的前缀为[A, AB]，后缀为[BC, C]，共有元素的长度0；
-　　－　"ABCD"的前缀为[A, AB, ABC]，后缀为[BCD, CD, D]，共有元素的长度为0；
-　　－　"ABCDA"的前缀为[A, AB, ABC, ABCD]，后缀为[BCDA, CDA, DA, A]，共有元素为"A"，长度为1；
-　　－　"ABCDAB"的前缀为[A, AB, ABC, ABCD, ABCDA]，后缀为[BCDAB, CDAB, DAB, AB, B]，共有元素为"AB"，长度为2；
-　　－　"ABCDABD"的前缀为[A, AB, ABC, ABCD, ABCDA, ABCDAB]，后缀为[BCDABD, CDABD, DABD, ABD, BD, D]，共有元素的长度为0。
-　　![kmp16](./images/kmp16.png)
-　　　"部分匹配"的实质是，有时候，字符串头部和尾部会有重复。比如，"ABCDAB"之中有两个"AB"，那么它的"部分匹配值"就是2（"AB"的长度）。搜索词移动的时候，第一个"AB"向后移动4位（字符串长度-部分匹配值），就可以来到第二个"AB"的位置。
-　　　
 ### 匹配算法
 1. 首先，字符串"BBC ABCDAB ABCDABCDABDE"的第一个字符与搜索词"ABCDABD"的第一个字符，进行比较。因为B与A不匹配，所以搜索词后移一位。
    ![kmp1](./images/kmp1.png)
