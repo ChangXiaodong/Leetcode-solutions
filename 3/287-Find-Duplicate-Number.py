@@ -1,3 +1,8 @@
+#coding=utf-8
+'''
+方法一：双指针
+方法二：二分搜索，无排序数组，数组值不用index进行搜索
+'''
 def findDuplicate(nums):
     """
     :type nums: List[int]
@@ -25,5 +30,24 @@ def findDuplicate1(nums):
 
     return finder
 
+def findDuplicate2(nums):
+    """
+    :type nums: List[int]
+    :rtype: int
+    """
+    low = 1
+    high = nums.__len__() - 1
+    while low <= high:
+        mid = (low + high) // 2
+        cnt = 0
+        for v in nums:
+            if v <= mid:
+                cnt += 1
+        if cnt <= mid:
+            low = mid + 1
+        else:
+            high = mid - 1
+    return low
 
-print(findDuplicate1([1, 3, 4, 2, 5, 6, 7, 2]))
+
+print(findDuplicate2([2,2,3,4,5,6,7,1]))
