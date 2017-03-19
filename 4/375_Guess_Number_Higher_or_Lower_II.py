@@ -13,5 +13,26 @@ def getMoneyAmount(n):
             dp[i][j] = i if i + 1 == j else global_min
     return dp[1][n]
 
+def dp(t, i, j):
+    if i >= j:
+        return 0
+    if t[i][j] != 0:
+        return t[i][j]
+    res = float("inf")
+    for x in range(i, j + 1):
+        buf_res = x + max(dp(t, i, x - 1), dp(t, x + 1, j))
+        res = min(buf_res, res)
+    t[i][j] = res
+    return res
 
-print(getMoneyAmount(4))
+def getMoneyAmount1(n):
+    """
+    :type n: int
+    :rtype: int
+    """
+    t = [[0 for _ in range(n + 1)] for _ in range(n + 1)]
+    dp(t, 1, n)
+    return t[1][n]
+
+
+print(getMoneyAmount1(2))
