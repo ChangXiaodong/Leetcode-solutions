@@ -1,7 +1,8 @@
 '''
 方法1：用哈希表
 方法2：异或
-'''class Solution(object):
+'''
+class Solution(object):
     def findTheDifference(self, s, t):
         """
         :type s: str
