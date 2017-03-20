@@ -13,3 +13,25 @@
 - 题目：判断一个数是不是二的整数次方
 
 *如果一个数是二的整数次方，那么他的二进制表示中有且只有一位是1
+
+- [48. Rotate Image](https://leetcode.com/problems/rotate-image/#/description)
+
+  旋转问题通用解题方法:
+
+  顺时针旋转:
+
+  ```
+   * first reverse up to down, then swap the symmetry matrix[i][j] <=> matrix[j][i]
+   * 1 2 3     7 8 9     7 4 1
+   * 4 5 6  => 4 5 6  => 8 5 2
+   * 7 8 9     1 2 3     9 6 3
+  ```
+
+  逆时针旋转：
+
+  ```
+   * first reverse left to right, then swap the symmetry matrix[i][j] <=> matrix[j][i]
+   * 1 2 3     3 2 1     3 6 9
+   * 4 5 6  => 6 5 4  => 2 5 8
+   * 7 8 9     9 8 7     1 4 7
+  ```
