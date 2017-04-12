@@ -1,14 +1,18 @@
 class Solution(object):
-    def dfs(self, course, cur_cour, learned, sch):
-        pre_cour = course[cur_cour]
-        for cour in pre_cour:
-            if not cour in learned:
-                if cour in sch:
-                    return False
-                sch.append(cour)
-                learned.append(cour)
-                self.dfs(course, cour, learned, sch)
-        self.path.append(cur_cour)
+    def dfs(self, graph, cur_course, visited, res):
+        if visited[cur_course] == 1:
+            return True
+        elif visited[cur_course] == -1:
+            return False
+        visited[cur_course] = -1
+        for c in graph[cur_course]:
+            if not self.dfs(graph, c, visited, res):
+                res.pop()
+                return False
+            else:
+                res.append(c)
+
+        visited[cur_course] = 1
         return True
 
     def findOrder(self, numCourses, prerequisites):
@@ -18,16 +22,14 @@ class Solution(object):
         :rtype: List[int]
         """
         course = [[] for _ in range(numCourses)]
+        visited = [0 for _ in range(numCourses)]
         for cur, pre in prerequisites:
             course[cur].append(pre)
-        self.path = []
-        for cur, pre in prerequisites:
-            p = self.dfs(course, cur, [],[])
-            if not p:
-                return []
-        return self.path
+        res = []
+        for i, c in enumerate(course):
+            self.dfs(course, i, visited, res)
+        return res
 
 
 solution = Solution()
-print(solution.findOrder(4, [[1, 0], [2, 0], [3, 1], [3, 2]]))
-
+print(solution.findOrder(2, [[0, 1]]))
