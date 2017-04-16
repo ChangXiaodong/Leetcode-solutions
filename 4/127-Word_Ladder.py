@@ -1,3 +1,17 @@
+# coding=utf-8
+'''
+广度优先搜索。
+从beginWord开始，找到本单词word变更一个字母(new_word)，并且在wordList中的单词，为下一次的遍历单词。
+如果遍历到word == endword，返回累加结果res。
+
+节约时间的方法：
+1.检查变更一个字母并且在wordlist中的方法，不要检查wordlist中的单次和本单词是不是差一个字母。
+改用，对本单词的每个位置，从a变到z，并且看是否在wordlist中。
+
+2. 对访问过的单次，直接从wordlist中删掉，不需要额外的used来保存是否访问过
+
+3.不要建立从本单词到下个单次映射的哈希表，直接把下个单次存在队列中，这件可以减少建哈希表的时间和空间。
+'''
 class Solution(object):
     def ladderLength(self, beginWord, endWord, wordList):
         """
