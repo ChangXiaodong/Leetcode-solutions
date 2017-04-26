@@ -31,7 +31,7 @@ def strStr1(haystack, needle):
             return i
     return -1
 
-
+#kmp
 def strStr2(haystack, needle):
     if not haystack and not needle:
         return 0
@@ -71,5 +71,36 @@ def strStr2(haystack, needle):
                 index2 = table[index2 - 1] #index2 = index2 - (index2 - table[index2 - 1])
     return -1
 
+#bm
+def strStr3(haystack, needle):
+    if not haystack and not needle:
+        return 0
+    if not needle:
+        return 0
+    n = len(haystack)
+    m = len(needle)
+    right = {}
+    for i in range(len(needle)):
+        right[needle[i]] = i
+    i = 0
+    while i <= n - m:
+        skip = 0
+        j = m - 1
+        while j >= 0:
+            if haystack[i+j] != needle[j]:
+                skip_buf = right.get(haystack[i+j], -1)
+                skip = j - skip_buf
+                if skip < 1:
+                    skip = 1
+                break
+            j -= 1
+        if skip == 0:
+            return i
+        i += skip
+    return -1
 
-print(strStr2("aabaaabaaac", "aabaaac"))
+
+
+
+
+print(strStr3("here is a simple example","example"))
