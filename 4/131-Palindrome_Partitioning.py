@@ -21,7 +21,29 @@ class Solution(object):
         dfs(0, [])
         return ans
 
-solution = Solution()
-print(solution.partition("aabbaabbaa"))
+class Solution2(object):
+    def dfs(self, s, buf, res):
+        if not s:
+            res.append(buf[:])
+            return
+        for i in range(1, len(s)+1):
+            if s[:i] == s[:i][::-1]:
+                buf.append(s[:i])
+                self.dfs(s[i:], buf, res)
+                buf.pop()
+
+    def partition(self, s):
+        """
+        :type s: str
+        :rtype: List[List[str]]
+        """
+        if not s:
+            return []
+        res = []
+        self.dfs(s, [], res)
+        return res
+
+solution = Solution2()
+print(solution.partition("aab"))
 
 
