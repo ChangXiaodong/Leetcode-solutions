@@ -62,4 +62,27 @@ def subsets3(nums):
                 res[j].append(nums[i])
     return res
 
+
+class Solution(object):
+    def dfs(self, nums, k, buf, res, index):
+        if buf.__len__() == k:
+            res.append(buf[:])
+            return
+        for i in range(index, len(nums)):
+            buf.append(nums[i])
+            self.dfs(nums, k, buf, res, i + 1)
+            buf.pop()
+
+    def subsets(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[List[int]]
+        """
+        res = []
+        for i in range(len(nums) + 1):
+            buf = []
+            self.dfs(nums, i, [], buf, 0)
+            res.extend(buf)
+        return res
+
 print(subsets3([1, 2, 3]))
