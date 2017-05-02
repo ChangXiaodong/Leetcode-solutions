@@ -52,5 +52,9 @@ def permute1(nums):
     helper(nums, used, item, res)
     return res
 
+def permute2(nums):
+    import itertools
+    return [i for i in itertools.permutations(nums)]
 
-print(permute1([0, 1, 2]))
+
+print(permute2([0, 1, 2]))
