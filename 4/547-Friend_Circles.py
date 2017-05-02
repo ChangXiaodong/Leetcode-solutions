@@ -29,6 +29,15 @@ class Solution(object):
                         buf[-1].append(i)
         return len(buf)
 
+    def dfs(self, M, buf, res, index, visited):
+        if M[]
+        if not visited[j]
+
+
+
+    def findCircleNum1(self, M):
+        pass
+
 
 solution = Solution()
 print(solution.findCircleNum(
