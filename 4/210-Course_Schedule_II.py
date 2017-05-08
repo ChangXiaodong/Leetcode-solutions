@@ -28,6 +28,37 @@ class Solution(object):
                     stack.append(i)
         return res if res.__len__() == numCourses else []
 
+    # visited 数组保存了3中状态，0，未学习， -1正在检查前提课程看是否能够完成学习，1已经学会
+    def dfs(self, graph, visited, course):
+        if visited[course] == -1:
+            return False
+        elif visited[course] == 1:
+            return True
+        visited[course] = -1
+        for j in graph[course]:
+            if not self.dfs(graph, visited, j):
+                return False
+        visited[course] = 1
+        self.res.append(course)
+        return True
+
+    def findOrder1(self, numCourses, prerequisites):
+        """
+        :type numCourses: int
+        :type prerequisites: List[List[int]]
+        :rtype: bool
+        """
+        n = numCourses
+        graph = [[] for _ in range(n)]
+        visited = [0 for _ in range(n)]
+        self.res = []
+        for c in prerequisites:
+            graph[c[0]].append(c[1])
+        for i in range(n):
+            if not self.dfs(graph, visited, i):
+                return []
+        return self.res
+
 
 solution = Solution()
-print(solution.findOrder(4,[[0,1],[3,1],[1,3],[3,2]]))
+print(solution.findOrder1(4,[[1,0],[3,0],[1,2],[3,2]]))

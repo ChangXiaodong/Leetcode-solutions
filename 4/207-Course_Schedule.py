@@ -1,3 +1,4 @@
+# coding=utf-8
 '''
 问题可以转换为寻找一个图是否有环
 方法1:dfs 先统计出每个点相连的点。放在graph中。然后遍历每个点。同时维护一个visit列表，表示当前路线节点的访问状态。
@@ -57,7 +58,36 @@ class Solution(object):
                     quene.append(c)
                     count += 1
         return count == numCourses
+    def canFinish1(self, numCourses, prerequisites):
+        """
+        :type numCourses: int
+        :type prerequisites: List[List[int]]
+        :rtype: bool
+        """
+        if not prerequisites:
+            return True
+        graph = [[] for _ in range(numCourses)]
+        degree = [0 for _ in range(numCourses)]
+        for cla in prerequisites:
+            graph[cla[0]].append(cla[1])
+            degree[cla[0]] += 1
+        queue = []
+        cnt = 0
+        for i in range(len(degree)):
+            if degree[i] == 0:
+                queue.append(i)
+                cnt += 1
+
+        while queue:
+            cur = queue.pop(0)
+            for i in range(len(graph)):
+                if cur in graph[i]:
+                    degree[i] -= 1
+                    if degree[i] == 0:
+                        queue.append(i)
+                        cnt += 1
+        return cnt == numCourses
 
 
 solution = Solution()
-print(solution.bfs(6, [[1, 0],[2,1],[2,3],[3,1],[4,5]]))
+print(solution.canFinish1(6, [[1, 0],[2,1],[2,3],[3,1],[4,5]]))
