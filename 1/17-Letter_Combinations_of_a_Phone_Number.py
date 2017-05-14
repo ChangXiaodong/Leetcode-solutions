@@ -1,3 +1,4 @@
+# coding=utf-8
 '''
 找到规律直接遍历
 '''
@@ -21,3 +22,6 @@ class Solution(object):
                     ans.append(item + ch)
             res = ans
         return res
+
+solution = Solution()
+print(solution.letterCombinations("23"))
