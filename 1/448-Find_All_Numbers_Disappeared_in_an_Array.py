@@ -10,7 +10,7 @@ class Solution(object):
         for i in range(n):
             index = nums[i]
             if index < -n:
-                index  = abs(index + n) - 1
+                index = abs(index + n) - 1
             else:
                 index = abs(index) - 1
             if nums[index] < 0:
@@ -20,5 +20,9 @@ class Solution(object):
         res = []
         for i in range(n):
             if nums[i] > 0:
-                res.append(i+1)
+                res.append(i + 1)
         return res
+
+
+s = Solution()
+print(s.findDisappearedNumbers([4, 3, 2, 7, 8, 2, 3, 1]))
