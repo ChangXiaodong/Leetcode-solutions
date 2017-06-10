@@ -1,3 +1,9 @@
+# coding=utf-8
+'''
+先把数组排序，然后从第一个开始遍历，设置三个指针，第一个指针是当前遍历的数，第二个是当前遍历的数+1，第三个是最后一个数。
+计算这三个数的和，如果等于0就加到结果中，然后去重。如果小于0，第二个指针后移，如果大于零，第三个指针前移。
+注意去掉重复的数
+'''
 def threeSum(nums):
     """
     :type nums: List[int]
@@ -23,10 +29,6 @@ def threeSum(nums):
                 k += 1
             else:
                 j -= 1
-
     return result
 
-
-
-
-print(threeSum([0, 0, 0, 0]))
+print(threeSum([-1, 0, 1, 2, -1, -4]))
