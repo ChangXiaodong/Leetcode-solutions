@@ -17,3 +17,5 @@ def countBits(num):
         res[i] = 1 + res[j]
         j += 1
     return res
+
+print(countBits(5))

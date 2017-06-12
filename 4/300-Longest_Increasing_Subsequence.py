@@ -160,4 +160,4 @@ class Solution(object):
 
 solution = Solution()
 print(solution.lengthOfLIS([10, 9, 2, 5, 3, 7, 101, 18]))
-print(solution.lengthOfLIS1([2, 2]))
+print(solution.lengthOfLIS1([10, 9, 2, 5, 3, 7, 101, 18]))
