@@ -18,9 +18,33 @@ def isValid(s):
             count -= 1
         elif s[j] == next_par and count == 0:
             if j - 1 < 1:
-                return True and isValid(s[j+1:])
+                return True and isValid(s[j + 1:])
             else:
-                return isValid(s[1:j]) and isValid(s[j+1:])
+                return isValid(s[1:j]) and isValid(s[j + 1:])
     return False
+
+
+class Solution(object):
+    def isValid(self, s):
+        """
+        :type s: str
+        :rtype: bool
+        """
+        if not s:
+            return True
+        stack = []
+        parent = {
+            "(": ")", "[": "]", "{": "}"
+        }
+        for i in range(len(s)):
+            cur = parent.get(s[i], '')
+            if cur:
+                stack.append(cur)
+            elif not stack or s[i] != stack.pop():
+                return False
+        if stack:
+            return False
+        return True
+
 
 print(isValid("[{[]{}}[})}]{[]}[)(()]{}{{]()}}](}[("))
