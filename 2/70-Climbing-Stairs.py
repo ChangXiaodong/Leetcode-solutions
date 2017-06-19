@@ -15,7 +15,6 @@ class Solution(object):
         else:
             bbefore = 0
             before = 1
-            steps = 0
             steps = bbefore + before
             for i in range(n-1):
                 bbefore = steps

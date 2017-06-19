@@ -7,8 +7,8 @@ def maxSubArray(nums):
         return
     max_sum = nums[0]
     result = max(nums)
-    for i, v in enumerate(nums[1:]):
-        max_sum = max([max_sum + v, v])
+    for v in nums[1:]:
+        max_sum = max(max_sum + v, v)
         result = max(result, max_sum)
     return result
 
