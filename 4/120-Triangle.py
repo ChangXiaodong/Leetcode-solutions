@@ -29,6 +29,15 @@ def minimumTotal1(triangle):
                 res[i][j] = min(res[i-1][j-1], res[i-1][j]) + triangle[i][j]
     return min(res[-1])
 
+def minimumTotal2(triangle):
+    if not triangle:
+        return
+    res = triangle[-1]
+    for i in range(len(triangle)-2, -1, -1):
+        for j in range(len(triangle[i])):
+            res[j] = min(res[j], res[j+1]) + triangle[i][j]
+    return res[0]
+
 
 print(minimumTotal([
     [2],
