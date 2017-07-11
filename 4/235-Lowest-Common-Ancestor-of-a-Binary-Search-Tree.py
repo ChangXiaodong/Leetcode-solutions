@@ -14,20 +14,23 @@ According to the definition of LCA on Wikipedia: “The lowest common ancestor i
 For example, the lowest common ancestor (LCA) of nodes 2 and 8 is 6. Another example is LCA of nodes 2 and 4 is 2, since a node can be a descendant of itself according to the LCA definition.
 '''
 import time
+
+
 # Definition for a binary tree node.
 class TreeNode(object):
     def __init__(self, x):
         self.val = x
         self.left = None
         self.right = None
+
+
 class Solution(object):
-    def isLowest(self,root,p,q):
-        self.node = root
-        if root.val > max(p.val,q.val):
-            self.isLowest(root.left,p,q)
-        if root.val < min(p.val,q.val):
-            self.isLowest(root.right,p,q)
-        return root
+    def help(self, node, p, q):
+        if node.val > max(p.val, q.val):
+            return self.help(node.left, p, q)
+        if node.val < min(p.val, q.val):
+            return self.help(node.right, p, q)
+        return node
 
     def lowestCommonAncestor(self, root, p, q):
         """
@@ -36,9 +39,9 @@ class Solution(object):
         :type q: TreeNode
         :rtype: TreeNode
         """
-        self.node = root
-        self.isLowest(root,p,q)
-        return self.node
+        if not root:
+            return root
+        return self.help(root, p, q)
 
 
 if __name__ == "__main__":
@@ -55,5 +58,5 @@ if __name__ == "__main__":
     treenode2.left = treenode1
     start = time.clock()
     test = Solution()
-    print test.lowestCommonAncestor(treenode5,treenode1,treenode4).val
-    print time.clock() - start
+    print(test.lowestCommonAncestor(treenode5, treenode1, treenode4).val)
+    print(time.clock() - start)
