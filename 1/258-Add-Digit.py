@@ -16,13 +16,21 @@ What are all the possible results?
 How do they occur, periodically or randomly?
 You may find this Wikipedia article useful.
 '''
+
+
 class Solution(object):
     def addDigits(self, num):
         """
         :type num: int
         :rtype: int
         """
-        return (-1)%9
+        if num == 0:
+            return 0
+        elif num % 9 == 0:
+            return 9
+        else:
+            return num % 9
+
 
 if __name__ == "__main__":
     test = Solution()
