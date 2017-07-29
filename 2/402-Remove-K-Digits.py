@@ -1,3 +1,7 @@
+# coding=utf-8
+'''
+删除波峰的值，删除k次
+'''
 def removeKdigits(num, k):
     out = []
     for d in num:

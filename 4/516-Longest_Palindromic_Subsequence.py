@@ -50,4 +50,4 @@ def longestPalindromeSubseq1(s):
     return dp[0]
 
 
-print(longestPalindromeSubseq1('bbbab'))
+print(longestPalindromeSubseq('bbbab'))
