@@ -29,4 +29,43 @@ def findItinerary(tickets):
     return route[::-1]
 
 
-print findItinerary([["JFK", "KUL"], ["JFK", "NRT"], ["NRT", "JFK"]])
+# print(findItinerary([["JFK", "KUL"], ["JFK", "NRT"], ["NRT", "JFK"]]))
+
+
+class Solution(object):
+    def dfs(self, tickets, table, buf, _from):
+        if not table:
+            buf.append(_from)
+            return buf
+        if not table.get(_from, "null") == "null":
+            buf.append(_from)
+            for i in range(len(table[_from])):
+                _to = table[_from][i]
+                table[_from].pop(i)
+                if not table[_from]:
+                    del table[_from]
+                if self.dfs(tickets, table, buf, _to):
+                    return buf
+                if table.get(_from, 'null') == "null":
+                    table[_from] = []
+
+                table[_from].insert(i, _to)
+
+    def findItinerary(self, tickets):
+        """
+        :type tickets: List[List[str]]
+        :rtype: List[str]
+        """
+        table = {}
+        for _from, _to in tickets:
+            if table.get(_from, "null") == 'null':
+                table[_from] = []
+            table[_from].append(_to)
+        for key, value in table.items():
+            table[key].sort()
+        res = []
+        self.dfs(tickets, table, res, "JFK")
+        return res
+
+s = Solution()
+print(s.findItinerary([["JFK","KUL"],["JFK","NRT"],["NRT","JFK"]]))
