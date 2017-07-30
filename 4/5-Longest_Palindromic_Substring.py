@@ -60,5 +60,55 @@ def longestPalindrome_dynamic(s):
     return s[index:index+max_len]
 
 
-print(longestPalindrome("aaaa"))
-print(longestPalindrome_dynamic("abcda"))
+
+
+class Solution(object):
+    def lcs(self, s1, s2):
+        dp = [[0 for _ in range(len(s1))] for _ in range(len(s2))]
+        res = ''
+        max_len = -1
+        x = 0
+        y = 0
+        for i in range(len(s1)):
+            for j in range(len(s2)):
+                if s1[i] == s2[j]:
+                    if i == 0 or j == 0:
+                        dp[i][j] = 1
+                    else:
+                        dp[i][j] = dp[i - 1][j - 1] + 1
+                else:
+                    dp[i][j] = 0
+                if dp[i][j] > max_len:
+                    max_len = dp[i][j]
+                    x = i
+                    y = j
+        while x >= 0 and y >= 0:
+            if s1[x] != s2[y] or max_len <= 0:
+                break
+            res += s1[x]
+            x -= 1
+            y -= 1
+            max_len -= 1
+        return res[::-1]
+
+    def longestPalindrome(self, s):
+        """
+        :type s: str
+        :rtype: str
+        """
+        n = len(s)
+        res = ''
+        dp = [[False for _ in range(n)] for _ in range(n)]
+        for i in range(n - 1, -1, -1):
+            for j in range(i, n):
+                dp[i][j] = s[i] == s[j] and (j - i < 3 or dp[i + 1][j - 1])
+                if dp[i][j] and (not res or j - i + 1 > len(res)):
+                    res = s[i:j + 1]
+        return res
+
+
+
+# print(longestPalindrome("aaaa"))
+# print(longestPalindrome_dynamic("abcda"))
+s = Solution()
+print(s.longestPalindrome("abcdasdfghjkldcba"))
