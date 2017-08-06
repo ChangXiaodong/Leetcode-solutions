@@ -1,0 +1,149 @@
+### Longest Common Substring
+
+最长公共子串：两个字符串公共的字串，必须连续
+
+### Longest Common Subsequence
+
+最长公共子序列：两个字符串公共子序列，可以不连续
+
+
+
+Longest Common Substring：
+
+动态规划：
+
+状态方程：
+
+if s1[i] == s2[j]:
+
+dp[i,j] = d[i-1, j-1] + 1
+
+else:
+
+dp[i,j] = 0
+
+如果在i，j处的两个字符串字母相等，则dp[i,j]为其左上角的和加1，否则等于0
+
+```
+def lcs(self, s1, s2):
+    dp = [[0 for _ in range(len(s1))] for _ in range(len(s2))]
+    res = ''
+    max_len = -1
+    x = 0
+    y = 0
+    for i in range(len(s1)):
+        for j in range(len(s2)):
+            if s1[i] == s2[j]:
+                if i == 0 or j == 0:
+                    dp[i][j] = 1
+                else:
+                    dp[i][j] = dp[i - 1][j - 1] + 1
+            else:
+                dp[i][j] = 0
+            if dp[i][j] > max_len:
+                max_len = dp[i][j]
+                x = i
+                y = j
+    while x >= 0 and y >= 0:
+        if s1[x] != s2[y] or max_len <= 0:
+            break
+        res += s1[x]
+        x -= 1
+        y -= 1
+        max_len -= 1
+    return res[::-1]
+```
+
+Longest Common Subsequence:
+
+动态规划-状态转移方程：
+
+if s1[i] == s2[j]:
+
+dp[i, j] = dp[i-1, j-1] + 1
+
+else:
+
+dp[i, j] = max(dp[i-1, j], dp[i, j-1])
+
+```
+def lcs(s1, s2):
+	length = max(len(s1), len(s2))
+	dp = [[0 for _ in range(length)] for _ in range(length)]
+	for i in range(1, len(s1)):
+		for j in range(1, len(s2)):
+		if s1[i] == s2[j]:
+			dp[i][j] = dp[i-1]dp[j-1] + 1
+		else:
+			dp[i][j] = max(dp[i-1][j], dp[j-1][i])
+	return dp[-1][-1]
+	
+```
+
+### 5. Longest Palindromic Substring
+
+- Difficulty:Medium
+- Total Accepted:216.1K
+- Total Submissions:858.7K
+- Contributor:LeetCode
+
+------
+
+Given a string **s**, find the longest palindromic substring in **s**. You may assume that the maximum length of **s** is 1000.
+
+**Example:**
+
+```
+Input: "babad"
+
+Output: "bab"
+
+Note: "aba" is also a valid answer.
+
+```
+
+**Example:**
+
+```
+Input: "cbbd"
+
+Output: "bb"
+```
+
+
+
+Solution:
+
+1：
+
+要找到s的最大回文序列，先把s翻转得到s'，找到s'和s的最大公共字串就是最大回文。但是查找是需要注意，如输入是"abcdqwebcda"是，会找到'abcd'。但这不是合理的最大回文，因此需要检查翻转前后的下标时候对应。
+
+2：
+
+动态规划-状态方程：
+
+if s[i] == s[j]:
+
+​	dp[i, j] = dp[i+1, j-1]
+
+else:
+
+​	dp[i, j] = False
+
+```
+def longestPalindrome(self, s):
+    """
+    :type s: str
+    :rtype: str
+    """
+    n = len(s)
+    res = ''
+    dp = [[False for _ in range(n)] for _ in range(n)]
+    for i in range(n - 1, -1, -1):
+        for j in range(i, n):
+            dp[i][j] = s[i] == s[j] and (j - i < 3 or dp[i + 1][j - 1])
+            if dp[i][j] and (not res or j - i + 1 > len(res)):
+                res = s[i:j + 1]
+    return res
+```
+

@@ -41,3 +41,25 @@ class Solution(object):
             reach = max(i + nums[i], reach)
             i += 1
         return i == n
+
+    def canJump2(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: bool
+        """
+        if not nums:
+            return False
+        n = nums.__len__()
+        dp = [0 for _ in range(n)]
+        dp[0] = nums[0]
+        if dp[0] == 0 and n > 1:
+            return False
+        for i in range(1, n):
+            dp[i] = max(i + nums[i], dp[i - 1])
+            if dp[i] <= i and i != n-1:
+                return False
+        return True
+
+
+s = Solution()
+print(s.canJump2([2,0,0]))
