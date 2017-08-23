@@ -140,7 +140,7 @@ class Solution(object):
         """
         if not nums:
             return 0
-        n = nums.__len__()
+        n =  nums.__len__()
         dp = [float("inf") for _ in range(n)]
         index = 0
         for v in nums:

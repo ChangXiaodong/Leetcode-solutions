@@ -1,4 +1,4 @@
-def calculateMinimumHP(dungeon):
+ def calculateMinimumHP(dungeon):
     """
     :type dungeon: List[List[int]]
     :rtype: int

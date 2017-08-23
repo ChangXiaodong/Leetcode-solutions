@@ -1,4 +1,4 @@
-#coding=utf-8
+ #coding=utf-8
 '''
 dp[n] = Ture if dp[i] == True and dp[i+1:n] == True
 '''
